@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Clase02</string>
+    <string name="lbl_texto_1">Texto 1</string>
+    <string name="lbl_texto_2">Texto 2</string>
+    <string name="lbl_presionar">Presionar</string>
+    <string name="lbl_siguiente">Siguiente</string>
+</resources>

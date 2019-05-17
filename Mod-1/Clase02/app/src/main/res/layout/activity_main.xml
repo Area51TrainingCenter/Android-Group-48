@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+Contenedores
+- ConstraintLayout
+- RelativeLayout
+- LinearLayout
+- FrameLayout
+
+Componentes
+- TextView
+- EditText
+- Button
+- Spinner
+- RadioButton
+- CheckBox
+- RatingBar
+- ImageView
+- ImageButton
+
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+    <!--
+    match_parent = todo el ancho o alto de la pantalla
+    wrap_content = el ancho o alto del componente
+    -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@android:color/holo_blue_light"
+        android:orientation="vertical"
+        android:padding="16dp">
+        <!--
+        layout_weight = para manejarlo en base a peso o porcentaje
+        Los componentes van a estar uno debajo del otro
+        -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/etTextoUno"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="@string/lbl_texto_1"
+                android:inputType="text"
+                android:maxLength="50" />
+
+            <EditText
+                android:id="@+id/etTextoDos"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="@string/lbl_texto_2"
+                android:inputType="number"
+                android:maxLength="3" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnPresionar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:text="@string/lbl_presionar" />
+
+        <TextView
+            android:id="@+id/tvTexto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:textSize="20sp"
+            tools:text="Hola mundo" />
+        <!-- sp = size per pixel
+             dp = density per pixel -->
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@android:color/holo_green_light"
+        android:orientation="horizontal">
+        <!--
+        Los componentes van a estar uno al costado del otro
+        -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="50"
+            android:background="@color/colorPrimary"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <EditText
+                android:id="@+id/etTextoUnoSeccion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/lbl_texto_1"
+                android:inputType="text" />
+
+            <EditText
+                android:id="@+id/etTextoDosSeccion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/lbl_texto_2"
+                android:inputType="text" />
+
+            <Button
+                android:id="@+id/btnPresionarSeccion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:text="@string/lbl_presionar" />
+        </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="50">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvTextoSeccion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    tools:text="Texto" />
+
+                <Button
+                    android:id="@+id/btnSiguiente"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/lbl_siguiente" />
+            </LinearLayout>
+        </FrameLayout>
+    </LinearLayout>
+</LinearLayout>

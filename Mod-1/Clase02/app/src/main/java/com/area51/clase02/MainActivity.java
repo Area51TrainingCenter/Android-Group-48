@@ -37,8 +37,17 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                String valor1 = texto1Seccion.getText().toString();
+                String valor2 = texto2Seccion.getText().toString();
+
                 Intent intent = new Intent(
                         MainActivity.this, SegundoActivity.class);
+
+                //Intent o Bundle
+                //Enviamos la información a la otra pantalla
+                intent.putExtra("valor1", valor1);
+                intent.putExtra("valor2", valor2);
+
                 startActivity(intent);
 
             }

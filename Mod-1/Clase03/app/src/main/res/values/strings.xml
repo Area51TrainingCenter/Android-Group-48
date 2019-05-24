@@ -7,4 +7,7 @@
     <string name="lbl_femenino">Femenino</string>
     <string name="lbl_aceptar">Aceptar</string>
     <string name="lbl_guardar">Guardar</string>
+    <string name="lbl_edad">Edad</string>
+    <string name="lbl_genero">Genero</string>
+    <string name="lbl_acepto">Acepto</string>
 </resources>

@@ -18,6 +18,8 @@ public class RegistroActivity extends AppCompatActivity {
     private RadioButton masculino, femenino;
     private CheckBox aceptar;
     private Button guardar;
+    int posicion;
+    Persona personaObj;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,31 @@ public class RegistroActivity extends AppCompatActivity {
                 android.R.layout.simple_spinner_dropdown_item,
                 getResources().getStringArray(R.array.edades));
         edad.setAdapter(adapter);
+
+        if (getIntent() != null) {
+            if (getIntent().hasExtra("persona")) {
+                personaObj = getIntent().getParcelableExtra("persona");
+                posicion = getIntent().getIntExtra("posicion", 0);
+                if (personaObj != null) {
+                    nombre.setText(personaObj.getNombre());
+                    apellido.setText(personaObj.getApellido());
+                    int i = 0;
+                    for (String itemEdad : getResources().getStringArray(R.array.edades)) {
+                        if (itemEdad.equals(String.valueOf(personaObj.getEdad()))) {
+                            edad.setSelection(i);
+                            break;
+                        }
+                        i++;
+                    }
+                    if (personaObj.getGenero().equals("Masculino")) {
+                        masculino.setChecked(true);
+                    } else {
+                        femenino.setChecked(true);
+                    }
+                    aceptar.setChecked(personaObj.isAcepta());
+                }
+            }
+        }
     }
 
     @Override
@@ -63,14 +90,28 @@ public class RegistroActivity extends AppCompatActivity {
                 persona.setGenero(valorGenero);
                 persona.setAcepta(valorAceptar);
 
-                //Agregar el objeto a la lista
-                MainActivity.personas.add(persona);
+                if (personaObj != null) {
+                    MainActivity.personas.get(posicion).setNombre(valorNombre);
+                    MainActivity.personas.get(posicion).setApellido(valorApellido);
+                    MainActivity.personas.get(posicion).setGenero(valorGenero);
+                    MainActivity.personas.get(posicion).setEdad(Integer.parseInt(valorEdad));
+                    MainActivity.personas.get(posicion).setAcepta(valorAceptar);
 
-                Toast.makeText(RegistroActivity.this,
-                        "Se agrego correctamente",
-                        Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegistroActivity.this,
+                            "Se modifico correctamente",
+                            Toast.LENGTH_SHORT).show();
 
-                finish();
+                    finish();
+                } else {
+                    //Agregar el objeto a la lista
+                    MainActivity.personas.add(persona);
+
+                    Toast.makeText(RegistroActivity.this,
+                            "Se agrego correctamente",
+                            Toast.LENGTH_SHORT).show();
+
+                    finish();
+                }
 
             }
         });

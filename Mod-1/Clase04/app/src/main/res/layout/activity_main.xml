@@ -12,8 +12,8 @@
         android:layout_height="185dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="51dp"
-        android:layout_marginBottom="342dp"
+        android:layout_marginEnd="52dp"
+        android:layout_marginBottom="43dp"
         app:srcCompat="@drawable/imagen" />
 
     <com.facebook.drawee.view.SimpleDraweeView

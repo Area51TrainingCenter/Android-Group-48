@@ -4,12 +4,16 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 
 import java.util.ArrayList;
 
 public class DetalleActivity extends AppCompatActivity {
     private Imagen imagen;
     private ViewPager viewPager;
+    private ImageView ivIzquierda, ivDerecha;
+    private ArrayList<Imagen> lista;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +22,8 @@ public class DetalleActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         viewPager = findViewById(R.id.viewPager);
+        ivIzquierda = findViewById(R.id.ivIzquierda);
+        ivDerecha = findViewById(R.id.ivDerecha);
 
 
         if (getIntent() != null) {
@@ -28,8 +34,7 @@ public class DetalleActivity extends AppCompatActivity {
                 }
             }
         }
-        ArrayList<Imagen> lista =
-                getIntent().getParcelableArrayListExtra("lista");
+        lista = getIntent().getParcelableArrayListExtra("lista");
         int posicion =
                 getIntent().getIntExtra("posicion", 0);
         if (lista != null) {
@@ -38,6 +43,26 @@ public class DetalleActivity extends AppCompatActivity {
             viewPager.setAdapter(adapter);
             viewPager.setCurrentItem(posicion);
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        ivIzquierda.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                viewPager.setCurrentItem(viewPager.getCurrentItem() - 1);
+                setTitle(lista.get(viewPager.getCurrentItem()).getNombre());
+            }
+        });
+        ivDerecha.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                viewPager.setCurrentItem(viewPager.getCurrentItem() + 1);
+                setTitle(lista.get(viewPager.getCurrentItem()).getNombre());
+            }
+        });
     }
 
     @Override

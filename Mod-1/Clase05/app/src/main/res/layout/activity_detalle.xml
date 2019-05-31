@@ -10,4 +10,18 @@
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+
+    <ImageView
+        android:id="@+id/ivIzquierda"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center_vertical"
+        android:src="@drawable/ic_flecha_izquierda" />
+
+    <ImageView
+        android:id="@+id/ivDerecha"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center_vertical|end"
+        android:src="@drawable/ic_flecha_derecha" />
 </FrameLayout>

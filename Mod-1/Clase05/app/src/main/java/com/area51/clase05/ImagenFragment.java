@@ -36,8 +36,8 @@ public class ImagenFragment extends Fragment {
         Imagen imagen = getArguments().getParcelable("item");
         if (imagen != null) {
             sdvImagen.setImageURI(Uri.parse(imagen.getUrl()));
-            //getActivity().setTitle(imagen.getNombre());
             tvTexto.setText(imagen.getNombre());
+            //getActivity().setTitle(imagen.getNombre());
         }
 
         return view;

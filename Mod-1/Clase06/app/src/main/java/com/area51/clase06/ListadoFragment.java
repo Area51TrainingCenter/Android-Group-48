@@ -31,6 +31,8 @@ public class ListadoFragment extends Fragment {
         super.onStart();
 
         //llamamos al adapter
+        ProductoAdapter adapter = new ProductoAdapter(lista, getActivity());
+        lvLista.setAdapter(adapter);
     }
 
     @Override

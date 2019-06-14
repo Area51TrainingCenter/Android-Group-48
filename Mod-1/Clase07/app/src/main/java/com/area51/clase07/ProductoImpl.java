@@ -21,9 +21,8 @@ public class ProductoImpl implements IProducto {
                 "select * from producto",
                 null
         );
-        ArrayList<Producto> lista = null;
+        ArrayList<Producto> lista = new ArrayList<>();
         if (cursor.moveToFirst()) {
-            lista = new ArrayList<>();
             do {
                 Producto producto = new Producto();
                 producto.setId(cursor.getInt(cursor.getColumnIndex("id")));

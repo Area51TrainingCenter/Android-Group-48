@@ -1,6 +1,7 @@
 package com.area51.clase;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -9,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.area51.clase.realm.IProducto;
+import com.area51.clase.realm.ProductoImpl;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.ArrayList;
@@ -25,6 +28,7 @@ public class ProductoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     class ProductoViewHolder extends RecyclerView.ViewHolder {
         SimpleDraweeView ivImagen;
         TextView tvTipo, tvNombre, tvDescripcion;
+        TextView tvModificar, tvEliminar;
 
         public ProductoViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -32,6 +36,8 @@ public class ProductoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             tvNombre = itemView.findViewById(R.id.tvNombre);
             tvTipo = itemView.findViewById(R.id.tvTipo);
             tvDescripcion = itemView.findViewById(R.id.tvDescripcion);
+            tvModificar = itemView.findViewById(R.id.tvModificar);
+            tvEliminar = itemView.findViewById(R.id.tvEliminar);
         }
     }
 
@@ -48,11 +54,29 @@ public class ProductoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
         ProductoViewHolder productoViewHolder = (ProductoViewHolder) viewHolder;
 
-        Producto producto = lista.get(i);
+        final Producto producto = lista.get(i);
         productoViewHolder.tvNombre.setText(producto.getNombre());
         productoViewHolder.tvDescripcion.setText(producto.getDescripcion());
         productoViewHolder.ivImagen.setImageURI(Uri.parse(producto.getRutaImagen()));
         productoViewHolder.tvTipo.setText(producto.getTipo());
+
+        productoViewHolder.tvModificar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, RegistroActivity.class);
+                intent.putExtra("item", producto);
+                context.startActivity(intent);
+            }
+        });
+        productoViewHolder.tvEliminar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                IProducto iProducto = new ProductoImpl();
+                iProducto.eliminar(producto.getCodigo());
+                lista.remove(producto);
+                notifyDataSetChanged();
+            }
+        });
     }
 
     @Override

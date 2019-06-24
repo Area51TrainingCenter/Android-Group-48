@@ -10,6 +10,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.area51.clase.realm.IProducto;
+import com.area51.clase.realm.ProductoEntidad;
+import com.area51.clase.realm.ProductoImpl;
+
 public class RegistroActivity extends AppCompatActivity {
     private AppCompatSpinner spTipo;
     private TextInputLayout tilNombre, tilDescripcion;
@@ -86,7 +90,7 @@ public class RegistroActivity extends AppCompatActivity {
                     return;
                 }
 
-                Producto producto = new Producto();
+                ProductoEntidad producto = new ProductoEntidad();
                 producto.setNombre(nombre);
                 producto.setTipo(tipo);
                 producto.setDescripcion(descripcion);
@@ -98,10 +102,17 @@ public class RegistroActivity extends AppCompatActivity {
                 else if (imagenSeleccionada.equals("imagen3"))
                     producto.setRutaImagen("res:/" + R.drawable.ic_imagen3);
 
-                MainActivity.lista.add(producto);
-                Toast.makeText(RegistroActivity.this,
-                        "Se agrego el producto", Toast.LENGTH_SHORT).show();
-                finish();
+                IProducto iProducto = new ProductoImpl();
+                ProductoEntidad resultado = iProducto.guardar(producto);
+                if (resultado != null && resultado.getCodigo() > 0) {
+                    //MainActivity.lista.add(producto);
+                    Toast.makeText(RegistroActivity.this,
+                            "Se agrego el producto", Toast.LENGTH_SHORT).show();
+                    finish();
+                } else {
+                    Toast.makeText(RegistroActivity.this,
+                            "Ocurrio un error", Toast.LENGTH_SHORT).show();
+                }
 
             }
         });

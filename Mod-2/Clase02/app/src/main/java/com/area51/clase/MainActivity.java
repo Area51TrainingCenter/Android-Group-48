@@ -8,12 +8,18 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.area51.clase.realm.IProducto;
+import com.area51.clase.realm.ProductoEntidad;
+import com.area51.clase.realm.ProductoImpl;
+
 import java.util.ArrayList;
+
+import io.realm.RealmResults;
 
 public class MainActivity extends AppCompatActivity {
     private RecyclerView rvDatos;
     private FloatingActionButton fbAgregar;
-    public static ArrayList<Producto> lista = new ArrayList<>();
+    //public static ArrayList<Producto> lista = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +33,19 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+
+        IProducto iProducto = new ProductoImpl();
+        RealmResults<ProductoEntidad> listaProductos = iProducto.obtenerProductos();
+        ArrayList<Producto> lista = new ArrayList<>();
+        for (ProductoEntidad item : listaProductos) {
+            Producto producto = new Producto();
+            producto.setRutaImagen(item.getRutaImagen());
+            producto.setDescripcion(item.getDescripcion());
+            producto.setTipo(item.getTipo());
+            producto.setNombre(item.getNombre());
+            producto.setCodigo(item.getCodigo());
+            lista.add(producto);
+        }
 
         ProductoAdapter adapter = new ProductoAdapter(this, lista);
         rvDatos.setLayoutManager(new LinearLayoutManager(this));

@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">ClaseKotlin</string>
+    <string name="lbl_Calcular">CALCULAR</string>
+    <string name="lbl_Valor1">VALOR 1</string>
+    <string name="lbl_Valor2">VALOR 2</string>
+    <string name="lbl_Enviar">ENVIAR</string>
+</resources>

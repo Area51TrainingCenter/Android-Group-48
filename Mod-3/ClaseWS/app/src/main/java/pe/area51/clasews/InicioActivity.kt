@@ -1,5 +1,6 @@
 package pe.area51.clasews
 
+import android.content.Context
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -13,13 +14,28 @@ class InicioActivity : AppCompatActivity() {
 
         val handler = Handler()
         handler.postDelayed({
-            startActivity(
-                Intent(
-                    this@InicioActivity,
-                    MainActivity::class.java
+
+            val preferences=
+                    getSharedPreferences("clasews",
+                            Context.MODE_PRIVATE)
+
+            if(preferences.contains("id")) {
+                startActivity(
+                        Intent(
+                                this@InicioActivity,
+                                HomeActivity::class.java
+                        )
                 )
-            )
-            finish()
+                finish()
+            }else{
+                startActivity(
+                        Intent(
+                                this@InicioActivity,
+                                MainActivity::class.java
+                        )
+                )
+                finish()
+            }
         }, 2000)
     }
 }

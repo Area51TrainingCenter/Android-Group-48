@@ -30,8 +30,11 @@ class MainActivity : AppCompatActivity() {
 
         tvRegistro.setOnClickListener {
             startActivity(
-                    Intent(this@MainActivity,
-                            RegistroActivity::class.java))
+                Intent(
+                    this@MainActivity,
+                    RegistroActivity::class.java
+                )
+            )
         }
 
         btnIniciarSesion.setOnClickListener {
@@ -39,40 +42,55 @@ class MainActivity : AppCompatActivity() {
             val contrasenia = etContrasena.text.toString()
 
             val retrofit = RetrofitHelper.obtenerConfiguracion()
-                    .create(MetodoRetrofit::class.java)
+                .create(MetodoRetrofit::class.java)
             val call = retrofit.validarUsuario(usuario, contrasenia)
             call.enqueue(object : Callback<UsuarioResponse> {
                 override fun onFailure(
-                        call: Call<UsuarioResponse>,
-                        t: Throwable
+                    call: Call<UsuarioResponse>,
+                    t: Throwable
                 ) {
                     Log.d("tag_clasews", "error ${t.message}")
                 }
 
                 override fun onResponse(
-                        call: Call<UsuarioResponse>,
-                        response: Response<UsuarioResponse>
+                    call: Call<UsuarioResponse>,
+                    response: Response<UsuarioResponse>
                 ) {
 
-                    Log.d("tag_clasews", "respuesta->" +
-                            Gson().toJson(response.body()))
+                    Log.d(
+                        "tag_clasews", "respuesta->" +
+                                Gson().toJson(response.body())
+                    )
 
                     val resultado = response.body()
-                    if(resultado!!.status){
+                    if (resultado!!.status) {
 
-                        val preferences=getSharedPreferences(
-                                "clasews", Context.MODE_PRIVATE
+                        val preferences = getSharedPreferences(
+                            "clasews", Context.MODE_PRIVATE
                         ).edit()
-                        preferences.putString("usuario",resultado.data.username)
-                        preferences.putString("nombre",resultado.data.name)
-                        preferences.putString("apellido",resultado.data.lastName)
-                        preferences.putString("genero",resultado.data.gender)
+                        preferences.putInt("id",resultado.data.id)
+                        preferences.putString("usuario", resultado.data.username)
+                        preferences.putString("nombre", resultado.data.name)
+                        preferences.putString("apellido", resultado.data.lastName)
+                        preferences.putString("genero", resultado.data.gender)
                         preferences.apply()
 
-                    }else{
-                        Toast.makeText(this@MainActivity,
-                                "Usuario y contrasena incorrectos",
-                                Toast.LENGTH_SHORT).show()
+                        val intent=Intent(this@MainActivity,
+                                HomeActivity::class.java)
+                        startActivity(intent)
+
+                        Toast.makeText(
+                            this@MainActivity,
+                            "Inicio de sesion correcto",
+                            Toast.LENGTH_SHORT
+                        ).show()
+
+                    } else {
+                        Toast.makeText(
+                            this@MainActivity,
+                            "Usuario y contrasena incorrectos",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
 
                 }

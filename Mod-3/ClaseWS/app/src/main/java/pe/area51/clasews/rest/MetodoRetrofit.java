@@ -1,12 +1,12 @@
 package pe.area51.clasews.rest;
 
+import pe.area51.clasews.rest.request.ProductRequest;
 import pe.area51.clasews.rest.request.UsuarioRequest;
+import pe.area51.clasews.rest.response.Datum;
+import pe.area51.clasews.rest.response.ProductoResponse;
 import pe.area51.clasews.rest.response.UsuarioResponse;
 import retrofit2.Call;
-import retrofit2.http.Body;
-import retrofit2.http.Field;
-import retrofit2.http.FormUrlEncoded;
-import retrofit2.http.POST;
+import retrofit2.http.*;
 
 public interface MetodoRetrofit {
 
@@ -17,4 +17,10 @@ public interface MetodoRetrofit {
 
     @POST("user/save")
     Call<UsuarioResponse> guardarUsuario(@Body UsuarioRequest request);
+
+    @GET("product")
+    Call<ProductoResponse> obtenerProductos();
+
+    @POST("product/save")
+    Call<Datum> guardarProducto(@Body ProductRequest request);
 }

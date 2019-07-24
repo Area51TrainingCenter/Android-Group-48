@@ -3,7 +3,7 @@ package pe.area51.clasews.rest.request;
 public class ProductRequest {
     private String name;
     private String description;
-    private int id_user;
+    private int idUser;
 
     public String getName() {
         return name;
@@ -21,11 +21,11 @@ public class ProductRequest {
         this.description = description;
     }
 
-    public int getId_user() {
-        return id_user;
+    public int getIdUser() {
+        return idUser;
     }
 
-    public void setId_user(int id_user) {
-        this.id_user = id_user;
+    public void setIdUser(int idUser) {
+        this.idUser = idUser;
     }
 }

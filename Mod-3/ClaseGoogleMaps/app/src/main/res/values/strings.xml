@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">ClaseGoogleMaps</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="location_rationale">El permiso es requerido</string>
+</resources>
